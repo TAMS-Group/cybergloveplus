@@ -1,5 +1,5 @@
 ### cybergloveplus_kinetic
-- ROS nodes for interfacing with our data globe
+- ROS nodes for interfacing with our data glove
 - Vlad's cybergloveplus package ported to ROS kinetic
 
 ### Usage

@@ -1,0 +1,5 @@
+<launch>
+	<node name="cybergloveplus_raw" pkg="cybergloveplus" type="cybergloveraw" />
+	<param name="serialport" type="string" value="/dev/ttyUSB0" />
+        <param name="frequency" type="int" value="100" />
+</launch>

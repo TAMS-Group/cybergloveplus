@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 2.4.6)
 project(cybergloveplus)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+set(CMAKE_BUILD_TYPE Release)
 
 find_package(catkin REQUIRED COMPONENTS
   # eigen
   roscpp
   message_generation
-
+  moveit_msgs
 )
 
 add_message_files(
@@ -20,7 +23,10 @@ generate_messages(
 )
 
 catkin_package(
-   CATKIN_DEPENDS roscpp  message_runtime
+   CATKIN_DEPENDS
+   roscpp
+   message_runtime
+   moveit_msgs
 )
 
 include_directories(

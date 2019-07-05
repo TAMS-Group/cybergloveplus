@@ -1,52 +1,51 @@
-#ifndef         CYBERGLOVE_CONTROL_H_
-# define        CYBERGLOVE_CONTROL_H_
+#ifndef CYBERGLOVE_CONTROL_H_
+#define CYBERGLOVE_CONTROL_H_
 
-#define JOINTS_SIZE	20
-#define DEFAULT_JOINT_ACTIVE	false
+#define JOINTS_SIZE 20
+#define DEFAULT_JOINT_ACTIVE false
 
 #include "cybergloveplus/cyberglove_calib_min_max.h"
 
-namespace CyberGlovePlus
-{
+namespace CyberGlovePlus {
 
-	class CyberGloveControl : public CyberGloveCalibMinMax
-	{
-		public:
-			CyberGloveControl();
-			~CyberGloveControl();
+class CyberGloveControl : public CyberGloveCalibMinMax {
+public:
+  CyberGloveControl();
+  ~CyberGloveControl();
 
-			int init();
+  int init();
 
-			void run();
+  void run();
 
-		protected:
-			void action();
+protected:
+  void action();
 
-		private:
-			std::vector<std::string> joints;
-			std::map<std::string, double> j_values;
-			std::map<std::string, double> j_previous_values;
-			std::map<std::string, double> j_commands;
-			std::map<std::string, double> j_previous_commands;
-			std::map<std::string, int> min_angles;
-			std::map<std::string, int> max_angles;
-			std::map<std::string, bool> joints_active;
+private:
+  std::vector<std::string> joints;
+  std::map<std::string, double> j_values;
+  std::map<std::string, double> j_previous_values;
+  std::map<std::string, double> j_commands;
+  std::map<std::string, double> j_previous_commands;
+  std::map<std::string, int> min_angles;
+  std::map<std::string, int> max_angles;
+  std::map<std::string, bool> joints_active;
 
-			std::map<std::string, ros::Publisher> publisher;
+  std::map<std::string, ros::Publisher> publisher;
 
-			static const double rad_ang = 3.141592 / 180;
+  ros::Publisher robot_state_publisher;
 
-			void init_limit_angles();
-			void update_commands();
-			void send_commands();
+  static constexpr double rad_ang = 3.141592 / 180;
 
-			bool send_command(std::string joint_name, double target);
+  void init_limit_angles();
+  void update_commands();
+  void send_commands();
 
-			void linear_one_one(std::string joint, std::string sensor);
-			double get_radiant_value(std::string joint, double value);
-	};
+  bool send_command(std::string joint_name, double target);
 
-}
+  void linear_one_one(std::string joint, std::string sensor);
+  double get_radiant_value(std::string joint, double value);
+};
+
+} // namespace CyberGlovePlus
 
 #endif
-

@@ -1,5 +1,5 @@
-### cybergloveplus_kinetic
-ROS nodes for interfacing with our data glove / Vlad's cybergloveplus package ported to ROS kinetic
+### cybergloveplus
+ROS nodes for interfacing with our data glove / Vlad's cybergloveplus package ported to ROS
 
 ### Usage
 - `rosparam set serialport /dev/ttyS0` : set correct port

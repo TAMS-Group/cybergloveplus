@@ -3,7 +3,6 @@
 namespace cybergloveplusui
 {
 
-
 FormCybergloveCalibration::FormCybergloveCalibration(QWidget *parent) : QDialog(parent), qnode()
 {
     _ui.setupUi(this);
@@ -23,30 +22,30 @@ FormCybergloveCalibration::FormCybergloveCalibration(QWidget *parent) : QDialog(
     qRegisterMetaType <GloveState> ("GloveState");
     connect(_ui.pushButton_send, SIGNAL(clicked()), this, SLOT(readGUI()));
 
-	for (int i = 0; i < _selectButtons.size();i++)
-	{
-		_selectButtons[i]->setChecked(true);
-		_autoButtons[i]->setChecked(true);
-	}
+    for (int i = 0; i < _selectButtons.size();i++)
+    {
+        _selectButtons[i]->setChecked(true);
+        _autoButtons[i]->setChecked(true);
+    }
 
 
-	if (!qnode.init())
-	{
-		cout << "Could not init qnode" << endl;
-	}
+    if (!qnode.init())
+    {
+        cout << "Could not init qnode" << endl;
+    }
 
-	 createInitialMap();
+     createInitialMap();
 
-	timer = new QTimer(this);
+    timer = new QTimer(this);
 
-	connect(timer, SIGNAL(timeout()), this, SLOT(refreshGUI()));
-	timer->start(1000);
+    connect(timer, SIGNAL(timeout()), this, SLOT(refreshGUI()));
+    timer->start(1000);
 
-	ros_timer = new QTimer(this);
+    ros_timer = new QTimer(this);
 
-	connect(timer, SIGNAL(timeout()), this, SLOT(refresh_receive_ros()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(refresh_receive_ros()));
 
-	ros_timer->start(10);
+    ros_timer->start(10);
 }
 
 
@@ -55,9 +54,9 @@ void FormCybergloveCalibration::createInitialMap()
     //QList<QLabel*> joints = _ui.frame->findChildren<QLabel*>();
     //qDebug() << "found" << joints.size() << "labels";
     for(unsigned int currentJoint=0; currentJoint < qnode.gl_sensors.size();currentJoint++)
-	{
-		QString sensor(qnode.gl_sensors[currentJoint].c_str());
-		_sensorNames << sensor;
+    {
+        QString sensor(qnode.gl_sensors[currentJoint].c_str());
+        _sensorNames << sensor;
         //if(joints[currentJoint]->text().contains("G_")) _sensorNames << joints[currentJoint]->text();
     }
     qDebug() << _sensorNames;
@@ -69,7 +68,7 @@ void FormCybergloveCalibration::createInitialMap()
     status.max = 0;
 
     for(int currentSensorState=0; currentSensorState<_sensorNames.size();currentSensorState++)
-	{
+    {
         _cyberGloveState[_sensorNames[currentSensorState]] = status;
     }
 
@@ -78,7 +77,7 @@ void FormCybergloveCalibration::createInitialMap()
     GloveState::iterator gloveItr;
     qDebug() << "********************************************************************";
     for(gloveItr=_cyberGloveState.begin(); gloveItr!=_cyberGloveState.end(); gloveItr++)
-	{
+    {
         qDebug()<< "Sensor " << gloveItr->first << " has " << gloveItr->second.autoCalibrate;
     }
     qDebug() << "********************************************************************";
@@ -135,22 +134,22 @@ GloveState FormCybergloveCalibration::getGloveState(){
 
 void FormCybergloveCalibration::refresh_receive_ros()
 {
-	ros::spinOnce();
+    ros::spinOnce();
 }
 
 
 void FormCybergloveCalibration::refreshGUI()
 {
-	//print(_cyberGloveState);
-	updateGUIfromGivenMap(qnode.current_status);
+    //print(_cyberGloveState);
+    updateGUIfromGivenMap(qnode.current_status);
 
-	for (unsigned int i = 0; i < qnode.gl_sensors.size(); i++)
-	{
-		QString text(qnode.gl_sensors[i].c_str());
-		text += " ";
-		text += QString::number(qnode.gl_values[i]);
-		_labels[i]->setText(text);
-	}
+    for (unsigned int i = 0; i < qnode.gl_sensors.size(); i++)
+    {
+        QString text(qnode.gl_sensors[i].c_str());
+        text += " ";
+        text += QString::number(qnode.gl_values[i]);
+        _labels[i]->setText(text);
+    }
 }
 
 
@@ -160,26 +159,26 @@ void FormCybergloveCalibration::setJointStatus(QString jointName)
 
     _autoButtons[currentRow]->setChecked(_cyberGloveState[jointName].autoCalibrate);
     _selectButtons[currentRow]->setChecked(_cyberGloveState[jointName].selected);
-	if (_cyberGloveState[jointName].autoCalibrate)
-	{
-		_spinBoxes[currentRow*2]->setValue(_cyberGloveState[jointName].min);
-		_spinBoxes[currentRow*2+1]->setValue(_cyberGloveState[jointName].max);
-	}
+    if (_cyberGloveState[jointName].autoCalibrate)
+    {
+        _spinBoxes[currentRow*2]->setValue(_cyberGloveState[jointName].min);
+        _spinBoxes[currentRow*2+1]->setValue(_cyberGloveState[jointName].max);
+    }
 }
 
 
 void FormCybergloveCalibration::updateGUIfromGivenMap(GloveState newState){
     //_cyberGloveState = newState;
-	readGUItoMap();
+    readGUItoMap();
     GloveState::iterator gloveItr;
 
-	//print(newState);
+    //print(newState);
     for(gloveItr=newState.begin(); gloveItr!=newState.end(); gloveItr++)
     {
-		if (! _cyberGloveState[gloveItr->first].selected)
-			_cyberGloveState[gloveItr->first].autoCalibrate = newState[gloveItr->first].autoCalibrate;
-		_cyberGloveState[gloveItr->first].min = newState[gloveItr->first].min;
-		_cyberGloveState[gloveItr->first].max = newState[gloveItr->first].max;
+        if (! _cyberGloveState[gloveItr->first].selected)
+            _cyberGloveState[gloveItr->first].autoCalibrate = newState[gloveItr->first].autoCalibrate;
+        _cyberGloveState[gloveItr->first].min = newState[gloveItr->first].min;
+        _cyberGloveState[gloveItr->first].max = newState[gloveItr->first].max;
 
         setJointStatus(gloveItr->first);
     }
@@ -187,7 +186,7 @@ void FormCybergloveCalibration::updateGUIfromGivenMap(GloveState newState){
 
 
 void FormCybergloveCalibration::readGUI(){
-	qnode.send_command(getGloveState());
+    qnode.send_command(getGloveState());
 }
 
 }

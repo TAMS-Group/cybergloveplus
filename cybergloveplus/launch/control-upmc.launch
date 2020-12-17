@@ -27,7 +27,7 @@
           <remap from="/sh_wrj2_position_controller/command" to="/sh_wrj2_mixed_position_velocity_controller/command" />
 
         </node>
-    <param name="serialport" type="string" value="/dev/ttyUSB1" />
+    <param name="serialport" type="string" value="/dev/ttyS0" />
     <param name="frequency" type="int" value="100" />
     <param name="ffj0_active" type="bool" value="true" />
     <param name="ffj3_active" type="bool" value="true" />

@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-<package>
-
+<package format="2">
   <name>cybergloveplus</name>
   <version>0.0.1</version>
-  <description>a</description>
+  <description>cybergloveplus</description>
 
   <maintainer email="hendrich@informatik.uni-hamburg.de">Philipp Ruppel</maintainer>
 
-  <license>-</license>
+  <license>BSD</license>
 
   <author email="ciobanu@informatik.uni-hamburg.de">Vlad Ciobanu</author>
   <author email="ruppel@informatik.uni-hamburg.de">Philipp Ruppel</author>
@@ -20,12 +19,16 @@
   <build_depend>sensor_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>moveit_msgs</build_depend>
+  <build_depend>moveit_ros_planning</build_depend>
+  <build_depend>moveit_ros_move_group</build_depend>
 
-  <run_depend>roscpp</run_depend>
-  <run_depend>message_runtime</run_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <run_depend>geometry_msgs</run_depend>
-  <run_depend>moveit_msgs</run_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>moveit_msgs</exec_depend>
+  <exec_depend>moveit_ros_planning</exec_depend>
+  <exec_depend>moveit_ros_move_group</exec_depend>
 
   <export>
   </export>

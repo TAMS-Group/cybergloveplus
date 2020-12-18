@@ -6,17 +6,25 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_BUILD_TYPE Release)
 
 find_package(catkin REQUIRED COMPONENTS
-  # eigen
+  moveit_core
+  moveit_ros_planning
+  moveit_ros_move_group
+  moveit_ros_planning_interface
   roscpp
   message_generation
   moveit_msgs
 )
+find_package(Eigen3 REQUIRED)
+
 
 add_message_files(
   FILES
   Calibration.msg
 )
-
+add_service_files(
+  FILES
+  CheckSelfCollision.srv
+)
 generate_messages(
     DEPENDENCIES
 
@@ -33,6 +41,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   include
 )
+include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
 
 add_executable(cybergloveraw src/cybergloveraw.cpp src/run_raw.cpp)
 add_executable(cyberglove_calib_min_max src/cybergloveraw.cpp src/cyberglove_calib_min_max.cpp src/run_calib_min_max.cpp)
@@ -45,3 +54,7 @@ add_dependencies(cyberglove_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin
 target_link_libraries(cybergloveraw ${catkin_LIBRARIES})
 target_link_libraries(cyberglove_calib_min_max ${catkin_LIBRARIES})
 target_link_libraries(cyberglove_control ${catkin_LIBRARIES})
+
+add_executable(interpolate_traj_service src/interpolate_traj_service.cpp)
+add_dependencies(interpolate_traj_service ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencpp)
+target_link_libraries(interpolate_traj_service ${catkin_LIBRARIES} ${OpenCV_LIBS})

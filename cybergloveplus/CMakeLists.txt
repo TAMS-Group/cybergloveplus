@@ -54,7 +54,3 @@ add_dependencies(cyberglove_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin
 target_link_libraries(cybergloveraw ${catkin_LIBRARIES})
 target_link_libraries(cyberglove_calib_min_max ${catkin_LIBRARIES})
 target_link_libraries(cyberglove_control ${catkin_LIBRARIES})
-
-add_executable(interpolate_traj_service src/interpolate_traj_service.cpp)
-add_dependencies(interpolate_traj_service ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_gencpp)
-target_link_libraries(interpolate_traj_service ${catkin_LIBRARIES} ${OpenCV_LIBS})

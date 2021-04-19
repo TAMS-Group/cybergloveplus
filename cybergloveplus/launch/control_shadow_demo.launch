@@ -1,0 +1,28 @@
+<launch>
+    <node name="cybergloveplus_control" pkg="cybergloveplus" type="cyberglove_control" />
+    <param name="serialport" type="string" value="/dev/ttyS0" />
+    <param name="frequency" type="int" value="100" />
+    <param name="ffj0_active" type="bool" value="true" />
+    <param name="ffj3_active" type="bool" value="true" />
+    <param name="ffj4_active" type="bool" value="true" />
+    <param name="mfj0_active" type="bool" value="true" />
+    <param name="mfj3_active" type="bool" value="true" />
+    <param name="mfj4_active" type="bool" value="true" />
+    <param name="rfj0_active" type="bool" value="true" />
+    <param name="rfj3_active" type="bool" value="true" />
+    <param name="rfj4_active" type="bool" value="true" />
+    <param name="lfj0_active" type="bool" value="true" />
+    <param name="lfj3_active" type="bool" value="true" />
+    <param name="lfj4_active" type="bool" value="true" />
+    <param name="lfj5_active" type="bool" value="false" />
+    <param name="thj1_active" type="bool" value="true" />
+    <param name="thj2_active" type="bool" value="true" />
+    <param name="thj3_active" type="bool" value="true" />
+    <param name="thj4_active" type="bool" value="true" />
+    <param name="thj5_active" type="bool" value="true" />
+    <param name="wrj1_active" type="bool" value="true" />
+    <param name="wrj2_active" type="bool" value="true" />
+    <include file="$(find teleop_motorhand)/launch/demo.launch" />
+    <node name="interpolate_traj_service" pkg="cybergloveplus" type="interpolate_traj_service" />
+    <node name="teleoperation_demo" pkg="cybergloveplus" type="teleoperation_demo.py" />
+</launch>

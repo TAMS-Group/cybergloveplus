@@ -1,0 +1,53 @@
+<launch>
+    <node name="cybergloveplus_control" pkg="cybergloveplus" type="cyberglove_control" >
+          <remap from="/sh_ffj0_position_controller/command" to="/sh_ffj0_mixed_position_velocity_controller/command" />
+          <remap from="/sh_ffj3_position_controller/command" to="/sh_ffj3_mixed_position_velocity_controller/command" />
+          <remap from="/sh_ffj4_position_controller/command" to="/sh_ffj4_mixed_position_velocity_controller/command" />
+
+          <remap from="/sh_mfj0_position_controller/command" to="/sh_mfj0_mixed_position_velocity_controller/command" />
+          <remap from="/sh_mfj3_position_controller/command" to="/sh_mfj3_mixed_position_velocity_controller/command" />
+          <remap from="/sh_mfj4_position_controller/command" to="/sh_mfj4_mixed_position_velocity_controller/command" />
+
+          <remap from="/sh_rfj0_position_controller/command" to="/sh_rfj0_mixed_position_velocity_controller/command" />
+          <remap from="/sh_rfj3_position_controller/command" to="/sh_rfj3_mixed_position_velocity_controller/command" />
+          <remap from="/sh_rfj4_position_controller/command" to="/sh_rfj4_mixed_position_velocity_controller/command" />
+
+          <remap from="/sh_lfj0_position_controller/command" to="/sh_lfj0_mixed_position_velocity_controller/command" />
+          <remap from="/sh_lfj3_position_controller/command" to="/sh_lfj3_mixed_position_velocity_controller/command" />
+          <remap from="/sh_lfj4_position_controller/command" to="/sh_lfj4_mixed_position_velocity_controller/command" />
+          <remap from="/sh_lfj5_position_controller/command" to="/sh_lfj5_mixed_position_velocity_controller/command" />
+
+          <remap from="/sh_thj1_position_controller/command" to="/sh_thj1_mixed_position_velocity_controller/command" />
+          <remap from="/sh_thj2_position_controller/command" to="/sh_thj2_mixed_position_velocity_controller/command" />
+          <remap from="/sh_thj3_position_controller/command" to="/sh_thj3_mixed_position_velocity_controller/command" />
+          <remap from="/sh_thj4_position_controller/command" to="/sh_thj4_mixed_position_velocity_controller/command" />
+          <remap from="/sh_thj5_position_controller/command" to="/sh_thj5_mixed_position_velocity_controller/command" />
+
+          <remap from="/sh_wrj1_position_controller/command" to="/sh_wrj1_mixed_position_velocity_controller/command" />
+          <remap from="/sh_wrj2_position_controller/command" to="/sh_wrj2_mixed_position_velocity_controller/command" />
+
+        </node>
+    <param name="serialport" type="string" value="/dev/ttyS0" />
+    <param name="frequency" type="int" value="100" />
+    <param name="ffj0_active" type="bool" value="true" />
+    <param name="ffj3_active" type="bool" value="true" />
+    <param name="ffj4_active" type="bool" value="false" />
+    <param name="mfj0_active" type="bool" value="true" />
+    <param name="mfj3_active" type="bool" value="true" />
+    <param name="mfj4_active" type="bool" value="false" />
+    <param name="rfj0_active" type="bool" value="true" />
+    <param name="rfj3_active" type="bool" value="true" />
+    <param name="rfj4_active" type="bool" value="false" />
+    <param name="lfj0_active" type="bool" value="true" />
+    <param name="lfj3_active" type="bool" value="true" />
+    <param name="lfj4_active" type="bool" value="false" />
+    <param name="lfj5_active" type="bool" value="false" />
+    <param name="thj1_active" type="bool" value="true" />
+    <param name="thj2_active" type="bool" value="true" />
+    <param name="thj3_active" type="bool" value="false" />
+    <param name="thj4_active" type="bool" value="false" />
+    <param name="thj5_active" type="bool" value="false" />
+    <param name="wrj1_active" type="bool" value="false" />
+    <param name="wrj2_active" type="bool" value="false" />
+</launch>
+

@@ -1,0 +1,20 @@
+<package>
+  <description brief="cybergloveplus">
+
+     cybergloveplus
+
+  </description>
+  <author>Vlad Ciobanu</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cybergloveplus</url>
+
+  <depend package="std_msgs"/>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+  <depend package="sr_robot_msgs"/>
+  <depend package="sensor_msgs"/>
+
+</package>
+
+

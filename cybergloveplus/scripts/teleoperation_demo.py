@@ -4,7 +4,6 @@ from __future__ import print_function
 import moveit_commander
 from moveit_msgs.msg import DisplayRobotState
 import rospy
-from cybergloveplus.srv import CheckSelfCollision
 
 """
 move shadow to specified pose which from cyberglove
@@ -63,19 +62,8 @@ def main():
         joint[22] = clip(joint[22], 0.524, -0.524)
         joint[23] = clip(joint[23], 1.57, 0)
 
-        start = mgi.get_current_joint_values()
-
-        # collision check and manipulate
-        csl_client = rospy.ServiceProxy("CheckSelfCollision", CheckSelfCollision)
-        try:
-            # mgi.go(joint)
-            shadow_pos = csl_client(start, tuple(joint))
-            if shadow_pos.result:
-                rospy.loginfo("Move Done!")
-            else:
-                rospy.logwarn("Failed to move!")
-        except rospy.ServiceException as exc:
-            rospy.logwarn("Service did not process request: " + str(exc))
+        mgi.set_joint_value_target(joint)
+        mgi.go()
 
 
 if __name__ == "__main__":
